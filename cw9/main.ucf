@@ -1,0 +1,18 @@
+# Clock:
+NET "clk_i" LOC = "T9" ; # 50 MHz clock
+# Push-buttons:
+NET "rst_i" LOC = "L14" ; # pressed high BTN3
+# RS232:
+NET "TXD_o" LOC = "R13" ; # RS 232 TXD
+NET "RXD_i" LOC = "T13" ; # RS 232 RXD
+
+NET "led_o<0>" LOC = "K12" ; # high on
+NET "led_o<1>" LOC = "P14" ; # high on
+NET "led_o<2>" LOC = "L12" ; # high on
+NET "led_o<3>" LOC = "N14" ; # high on
+NET "led_o<4>" LOC = "P13" ; # high on
+NET "led_o<5>" LOC = "N12" ; # high on
+NET "led_o<6>" LOC = "P12" ; # high on
+NET "led_o<7>" LOC = "P11" ; # high on
+
+NET "sw_i" LOC = "F12" ; # active high when in UP position

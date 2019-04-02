@@ -1,0 +1,3 @@
+NET "clk_i" LOC = "T9" ; # 50 MHz clock
+NET "rst_i" LOC = "L14" ; # active high
+NET "led_o" LOC = "P11" ; # active high 
