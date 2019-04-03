@@ -1,30 +1,3 @@
---------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   22:07:21 03/27/2013
--- Design Name:   
--- Module Name:   C:/Users/Adi/cw7/test_main.vhd
--- Project Name:  cw7
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: main
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends
--- that these types always be used for the top-level I/O of a design in order
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
@@ -47,7 +20,6 @@ ARCHITECTURE behavior OF test_main IS
         );
     END COMPONENT;
     
-
    --Inputs
    signal start_stop_button_i : std_logic := '0';
    signal clk_i : std_logic := '0';
@@ -80,7 +52,6 @@ BEGIN
 		wait for clk_i_period/2;
    end process;
  
-
    -- Stimulus process
    stim_proc: process
    begin		

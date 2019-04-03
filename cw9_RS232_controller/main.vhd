@@ -1,141 +1,118 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    12:32:43 04/17/2013 
--- Design Name: 
--- Module Name:    main - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
-----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+ENTITY main IS
+    Port(	clk_i 	: in  	STD_LOGIC;
+			rst_i 	: in  	STD_LOGIC;
+			TXD_o 	: out  	STD_LOGIC;
+			RXD_i 	: in  	STD_LOGIC;
+			sw_i 	: in  	STD_LOGIC;
+			led_o 	: out  	STD_LOGIC_VECTOR (7 DOWNTO 0) );
+END main;
 
-entity main is
-    Port ( clk_i : in  STD_LOGIC;
-           rst_i : in  STD_LOGIC;
-           TXD_o : out  STD_LOGIC;
-           RXD_i : in  STD_LOGIC;
-			  sw_i : in  STD_LOGIC;
-           led_o : out  STD_LOGIC_VECTOR (7 downto 0)
-			  );
-end main;
+ARCHITECTURE Behavioral of main IS
+	CONSTANT N: INTEGER	:= 5208;
+	
+	SIGNAL A			: STD_LOGIC						:= '0';
+	SIGNAL B			: STD_LOGIC						:= '0';
+	SIGNAL C			: STD_LOGIC						:= '0';
+	SIGNAL state		: INTEGER RANGE 0 TO 6			:= 0;
+	SIGNAL counter		: INTEGER RANGE 0 TO 50000000	:= 0;
+	SIGNAL data 		: STD_LOGIC_VECTOR (7 DOWNTO 0)	:= "00000000";
+	SIGNAL data_counter	: INTEGER RANGE 0 TO 7			:= 0;
+	
+BEGIN
 
-architecture Behavioral of main is
-signal A: STD_LOGIC:='0';
-signal B: STD_LOGIC:='0';
-signal C: STD_LOGIC:='0';
-signal stan: integer range 0 to 6:=0;
-signal licznik: integer range 0 to 50000000:=0;
-constant N: integer:=5208;
-signal dane :  STD_LOGIC_VECTOR (7 downto 0):="00000000";
-signal licznik_dane: integer range 0 to 7:=0;
-begin
-process(clk_i,rst_i)
-begin
-	if rst_i='1' then
-	stan <= 0;
-	licznik <= 0;
-	dane <= "00000000";
-	licznik_dane <= 0;
-	elsif rising_edge(clk_i) then
-		A<=RXD_i;
-		B<=A;
-		C<=B;
-		case stan is
-          when 0 => 
-			 TXD_o<='1';
-			 if C='1' and B='0' then
-				stan<=1;
-				licznik<=0;
-			 end if;
-			 when 1 => 
-			 if licznik=N/2 then
-				stan<=2; -- Pocz¹tek odczytu
-				licznik <= 0;
-				else
-				licznik <= licznik + 1;
-				end if;
-			 when 2 =>
-			   if licznik=N then
-						licznik<=0;
-						dane(licznik_dane) <= C;
-					if licznik_dane=7 then
-						stan <= 3;
-						licznik_dane <=0;
-					else
-					licznik_dane <= licznik_dane + 1;
-					end if;
-				else
-					licznik <= licznik + 1;
-				end if;
-			 when 3 =>
-				if licznik=N then
-					stan <= 4;
-					if sw_i = '1' then
-					dane <= dane + "00100000";
-					else
-					dane <= dane + "00000001";
-					end if;
-					TXD_o<='1';
-					licznik<=0;
-				else
-					licznik <= licznik + 1;
-				end if;
-			 when 4 =>
-				if licznik=N then
-					stan <= 5;
-					TXD_o<='0';
-					licznik<=0;
-				else
-					licznik <= licznik + 1;
-				end if;
-			 when 5 =>
-				if licznik=N then
-					licznik<=0;
-						TXD_o <= dane(licznik_dane);
-						if licznik_dane=7 then
-							stan <= 6;
-							licznik_dane <=0;
-						else
-						licznik_dane <= licznik_dane + 1;
-						end if;
-				else
-					licznik <= licznik + 1;
-				end if;
-				when 6 =>
-				if licznik=N then
-					stan <= 0;
-					TXD_o<='1';
-					licznik<=0;
-				else
-					licznik <= licznik + 1;
-				end if;
-          when others =>
-				stan <= 0;
-				licznik <=0;
-       end case;
-		
+	PROCESS( clk_i,rst_i )
+	BEGIN
+		IF rst_i = '1' THEN
+			state 			<= 0;
+			counter 		<= 0;
+			data 			<= "00000000";
+			data_counter 	<= 0;
+		ELSIF rising_edge(clk_i) THEN
+			A	<=	RXD_i;
+			B	<=	A;
+			C	<=	B;
+			CASE state IS
+				WHEN 0 => 
+					TXD_o	<= '1';
+					IF C = '1' AND B = '0' THEN
+						state	<= 1;
+						counter	<= 0;
+					END IF;
+				WHEN 1 => 
+					IF counter = N/2 THEN
+						state	<= 2; -- Read start
+						counter <= 0;
+					ELSE
+						counter <= counter + 1;
+					END IF;
+				WHEN 2 =>
+					IF counter = N THEN
+						counter				<= 0;
+						data(data_counter) 	<= C;
+						IF data_counter = 7 THEN
+							state		 <= 3;
+							data_counter <= 0;
+						ELSE
+							data_counter <= data_counter + 1;
+						END IF;
+					ELSE
+						counter <= counter + 1;
+					END IF;
+				WHEN 3 =>
+					IF counter = N THEN
+						state <= 4;
+						IF sw_i = '1' THEN
+							data <= data + "00100000";
+						ELSE
+							data <= data + "00000001";
+						END IF;
+						TXD_o	<= '1';
+						counter	<= 0;
+					ELSE
+						counter <= counter + 1;
+					END IF;
+				WHEN 4 =>
+					IF counter = N THEN
+						state 	<= 5;
+						TXD_o	<= '0';
+						counter	<= 0;
+					ELSE
+						counter <= counter + 1;
+					END IF;
+				WHEN 5 =>
+					IF counter = N THEN
+						counter	<= 0;
+						TXD_o <= data(data_counter);
+						IF data_counter = 7 THEN
+							state 			<= 6;
+							data_counter 	<= 0;
+						ELSE
+							data_counter <= data_counter + 1;
+						END IF;
+					ELSE
+						counter <= counter + 1;
+					END IF;
+				WHEN 6 =>
+					IF counter = N THEN
+						state 	<= 0;
+						TXD_o	<= '1';
+						counter	<= 0;
+					ELSE
+						counter <= counter + 1;
+					END IF;
+				WHEN others =>
+					state 	<= 0;
+					counter <= 0;
+			END CASE;
 			
-		end if;
-		
-end process;
-led_o <= dane ;
-end Behavioral;
+			END IF;
+	END PROCESS;
+	led_o <= data;
+	
+END Behavioral;
 

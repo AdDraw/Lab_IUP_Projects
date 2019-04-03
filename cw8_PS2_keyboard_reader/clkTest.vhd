@@ -1,57 +1,36 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    23:20:26 04/02/2013 
--- Design Name: 
--- Module Name:    clkTest - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
-----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+ENTITY clkTest IS
+    Port( 	clk_i 		: in  	STD_LOGIC;
+			ps2_clk_i 	: in  	STD_LOGIC;
+			clk_o 		: out  	STD_LOGIC);
+END clkTest;
 
-entity clkTest is
-    Port ( clk_i : in  STD_LOGIC;
-           ps2_clk_i : in  STD_LOGIC;
-           clk_o : out  STD_LOGIC);
-end clkTest;
+ARCHITECTURE Behavioral OF clkTest IS
 
-architecture Behavioral of clkTest is
-signal stan : STD_LOGIC:='0';
-signal licznik : integer range 0 to 16000 :=0;
-begin
-process(clk_i)
-begin
-if rising_edge(clk_i) then
-		if licznik = 2000 then
-			if stan/='0' and ps2_clk_i='0' then
-			clk_o <= '1';
-			else
-			clk_o <= '0';
-			end if;
-		stan <= ps2_clk_i;
-		else
-		licznik <= licznik + 1;
-		end if;
-end if;
-end process;
+	SIGNAL state : STD_LOGIC:='0';
+	SIGNAL counter : INTEGER RANGE 0 TO 16000 :=0;
+	
+BEGIN
 
-end Behavioral;
+	PROCESS( clk_i )
+	BEGIN
+		IF rising_edge( clk_i ) THEN
+				IF counter = 2000 THEN
+					IF state /= '0' AND ps2_clk_i = '0' THEN
+						clk_o <= '1';
+					ELSE
+						clk_o <= '0';
+					END IF;
+					state 	<= ps2_clk_i;
+				ELSE
+					counter <= counter + 1;
+				END IF;
+		END IF;
+	END PROCESS;
+
+END Behavioral;
 

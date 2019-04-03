@@ -1,30 +1,3 @@
---------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   23:42:35 04/02/2013
--- Design Name:   
--- Module Name:   C:/Users/Adi/cw8/test_main.vhd
--- Project Name:  cw8
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: main
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends
--- that these types always be used for the top-level I/O of a design in order
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
@@ -93,7 +66,7 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      -- hold reset state for 100ms.
+		-- hold reset state for 100ms.
 		ps2_data_i <= '1';
 		wait for clk_i_period*20*1.8;
 		ps2_data_i <= '0';
@@ -111,15 +84,9 @@ BEGIN
 		ps2_data_i <= '0';
 		wait for clk_i_period*10*1;
 		ps2_data_i <= '1';
-		
-		
-      wait for 100ms;	
-
-      wait for clk_i_period*10;
-
-      -- insert stimulus here 
-
-      wait;
+		wait for 100ms;	
+		wait for clk_i_period*10;
+		wait;
    end process;
 
 END;

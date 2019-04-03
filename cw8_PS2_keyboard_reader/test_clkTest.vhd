@@ -1,30 +1,3 @@
---------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   23:25:43 04/02/2013
--- Design Name:   
--- Module Name:   C:/Users/Adi/cw8/test_clkTest.vhd
--- Project Name:  cw8
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: clkTest
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends
--- that these types always be used for the top-level I/O of a design in order
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
@@ -82,16 +55,4 @@ BEGIN
 		wait for clk_i_period*10/2;
    end process;
  
-
-   -- Stimulus process
-   stim_proc: process
-   begin		
-      -- hold reset state for 100ms.
-
-
-      -- insert stimulus here 
-
-      wait;
-   end process;
-
 END;
