@@ -7,5 +7,5 @@ hexadecimal display. The submodule was put in an environment allowing for the
 manual testing through the use of buttons.
 
 This project is intended for studying only.
-Made to comply with a SPARTAN 3 FPGA by Xilinx.
+Made to comply with a Digilent Spartan-3 development board with a Spartan-3 3S200 FT256-4 FPGA.
 

@@ -9,4 +9,4 @@ For odd numbers the ratio of the clock will differ from 50%.
 By no means it is a viable and a secure divider for the use in complex projects.
 
 This project is intended for studying only.
-Made to comply with a SPARTAN 3 FPGA by Xilinx.
+Made to comply with a Digilent Spartan-3 development board with a Spartan-3 3S200 FT256-4 FPGA.
