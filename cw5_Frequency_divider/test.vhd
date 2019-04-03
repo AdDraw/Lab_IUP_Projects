@@ -1,30 +1,4 @@
---------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   13:39:23 03/06/2013
--- Design Name:   
--- Module Name:   C:/Designs/cw5/test.vhd
--- Project Name:  cw5
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: cw5
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends
--- that these types always be used for the top-level I/O of a design in order
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---------------------------------------------------------------------------------
+--TESTBENCH
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
@@ -74,11 +48,9 @@ BEGIN
 		wait for clk_i_period/2;
    end process;
  
-
    -- Stimulus process
    stim_proc: process
    begin		
-     
       wait for 100ps;	
 		rst_i <= '1';
 		wait for 40ps;	
