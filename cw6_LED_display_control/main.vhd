@@ -56,14 +56,14 @@ begin
 --Combinational Logic
 --Port Mapping
 	uut0: Clkgen PORT MAP(  clk_i 		=> clk_i,
-						rst_i 		=> Reset,
-						clk_o 		=> Clock);
+							rst_i 		=> Reset,
+							clk_o 		=> Clock);
 						
 	uut1: Display PORT MAP( clk_i 		=> Clock,
-						rst_i 		=> Reset,
-						digit_i 	=> Digit,
-						led7_an_o 	=> led7_an_o,
-						led7_seg_o 	=> led7_seg_o);
+							rst_i 		=> Reset,
+							digit_i 	=> Digit,
+							led7_an_o 	=> led7_an_o,
+							led7_seg_o 	=> led7_seg_o);
 
 	WITH sw_i(3 downto 0)  SELECT
 		Seg_o <= D00 WHEN  "0000",
