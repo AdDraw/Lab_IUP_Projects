@@ -1,6 +1,6 @@
 by Adam Drawc 2019 April
 
-This code was made as a 9th assignment to do in the IUP class.
+This code was made as the 9th assignment to do in the IUP class.
 
 
 This project is intended for studying only.

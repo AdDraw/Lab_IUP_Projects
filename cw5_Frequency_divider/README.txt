@@ -1,6 +1,6 @@
 by Adam Drawc 2019 April
 
-This code was made as a 5th assignment to do in the IUP class.
+This code was made as the 5th assignment to do in the IUP class.
 
 It can divide the frequency using a configurable integer.
 Was made to work with a clock of 50MHz and works with both even and odd integers.
